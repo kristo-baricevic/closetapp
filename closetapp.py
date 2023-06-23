@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import filedialog
 import numpy as np
 from PIL import Image
-from skimage.transform import resize
+import skimage.transform 
 
 def classify_image():
     # Declare "image" as a global variable
@@ -32,8 +32,14 @@ def preprocess_image(image):
     # Convert image to grayscale
     image = image.convert("L")
 
+    # Print the original image size
+    print("Original image size:", image.size)
+
     # Resize the image to a fixed size (e.g., 224x224)
-    image = resize(image, (224, 224), mode='reflect', anti_aliasing=True)
+    image = image.resize((224, 224), resample=Image.BILINEAR)
+
+    # Print the resized image size
+    print("Resized image size:", image.size)
 
     # Convert the image to a numpy array
     image_array = np.array(image)
