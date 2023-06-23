@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog
 import numpy as np
 from PIL import Image
+from PIL import ImageTk
 import skimage.transform 
 
 def classify_image(category_var):
@@ -15,6 +16,9 @@ def classify_image(category_var):
         try:
             image = Image.open(image_path)
             processed_image = preprocess_image(image)
+
+            # Display the image
+            display_image(image)
             
             # Perform image classification based on the selected category
             category = category_var.get()
@@ -68,6 +72,19 @@ def classify_category(category, image):
     else:
         return "Unknown"
     
+def display_image(image):
+    # Resize the image to fit within a specified maximum width and height while preserving the aspect ratio
+    max_width = 400
+    max_height = 400
+    image.thumbnail((max_width, max_height))
+
+    # Convert the PIL Image to a Tkinter-compatible PhotoImage
+    image_tk = ImageTk.PhotoImage(image)
+
+    # Update the image label with the new image
+    image_label.config(image=image_tk)
+    image_label.image = image_tk  # Keep a reference to avoid garbage collection
+
 
 # Create the main window
 window = tk.Tk()
