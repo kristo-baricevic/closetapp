@@ -89,5 +89,9 @@ classify_button.pack()
 result_label = tk.Label(window, text="")
 result_label.pack()
 
+# Add a label to display the uploaded image
+image_label = tk.Label(window)
+image_label.pack()
+
 # Start the main event loop
 window.mainloop()
