@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 import skimage.transform 
 
-def classify_image():
+def classify_image(category_var):
     # Declare "image" as a global variable
     global image
 
@@ -17,7 +17,7 @@ def classify_image():
             processed_image = preprocess_image(image)
             
             # Perform image classification based on the selected category
-            category = category_entry.get()
+            category = category_var.get()
             predicted_category = classify_category(category, processed_image)
 
             # Display the result
@@ -72,14 +72,17 @@ def classify_category(category, image):
 # Create the main window
 window = tk.Tk()
 
+# Create a variable to store the selected category
+category_var = tk.StringVar()
+
 # Add a label and entry for category input
 category_label = tk.Label(window, text="Category:")
 category_label.pack()
-category_entry = tk.Entry(window)
-category_entry.pack()
+category_dropdown = tk.OptionMenu(window, category_var, "Top", "Bottom", "Shoes", "Hat", "Accessory")
+category_dropdown.pack()
 
 # Add a button to select the image and perform classification
-classify_button = tk.Button(window, text="Select Image", command=classify_image)
+classify_button = tk.Button(window, text="Select Image", command=lambda: classify_image(category_var))
 classify_button.pack()
 
 # Add a label to display the classification result
