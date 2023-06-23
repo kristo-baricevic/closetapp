@@ -59,15 +59,15 @@ def preprocess_image(image):
 def classify_category(category, image):
     # Implement the classification logic based on the user's input category
     # Here's an example rule-based approach
-    if category == "top":
+    if category.lower() == "top":
         return "Top"
-    elif category == "bottom":
+    elif category.lower() == "bottom":
         return "Bottom"
-    elif category == "shoes":
+    elif category.lower() == "shoes":
         return "Shoes"
-    elif category == "hat":
+    elif category.lower() == "hat":
         return "Hat"
-    elif category == "accessory":
+    elif category.lower() == "accessory":
         return "Accessory"
     else:
         return "Unknown"
